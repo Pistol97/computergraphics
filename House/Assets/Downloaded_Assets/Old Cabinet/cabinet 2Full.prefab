@@ -246,6 +246,7 @@ GameObject:
   - component: {fileID: 13100293267121784}
   - component: {fileID: 13100293268087992}
   - component: {fileID: 13100293256464824}
+  - component: {fileID: 748947473249659304}
   m_Layer: 0
   m_Name: cabinet 2Full
   m_TagString: Untagged
@@ -352,6 +353,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &748947473249659304
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13100293265832568}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 114.9998, y: 195.00029, z: 53.999817}
+  m_Center: {x: -2.499916, y: 96.91567, z: 0.9999981}
 --- !u!1 &13100293265832574
 GameObject:
   m_ObjectHideFlags: 0
