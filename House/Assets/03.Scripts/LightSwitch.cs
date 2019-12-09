@@ -5,6 +5,7 @@ using UnityEngine;
 public class LightSwitch : MonoBehaviour
 {
     [SerializeField] private GameObject light;
+    [SerializeField] private GameObject book;
     private bool lightOn = true;
     public bool LightOn
     {
@@ -21,5 +22,6 @@ public class LightSwitch : MonoBehaviour
     {
         lightOn = false;
         light.SetActive(lightOn);
+        book.SetActive(true);
     }
 }
