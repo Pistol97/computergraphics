@@ -5,10 +5,13 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     public CharacterController controller;
-
+    
     public float moveSpeed = 12f;
     private float gravity = -9.81f;
-  
+
+    [SerializeField] private AudioClip[] footsteps;
+    [SerializeField] private AudioSource footstep;
+    [SerializeField] private AudioSource sigh;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -16,13 +19,25 @@ public class PlayerControl : MonoBehaviour
 
     Vector3 velocity;
     bool isGrounded;
-
+    bool isChanged = false;
     void Start()
     {
-
+        footstep = GetComponent<AudioSource>();
+        footstep.clip = footsteps[0];
+        footstep.Play();
     }
+
     void Update()
     {
+        if (RedBook.StartHorror == true && isChanged == false )
+        {
+            moveSpeed = 1.5f;
+            footstep.clip = footsteps[1];
+            footstep.Play();
+            sigh.Play();
+            isChanged = true;
+        }
+
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         //땅에 닿았을 경우
@@ -44,5 +59,14 @@ public class PlayerControl : MonoBehaviour
 
         //중력 중력속도 설정
         controller.Move(velocity * Time.deltaTime);
+
+        if (move.x != 0 || move.y != 0)
+        {
+            footstep.mute = false;
+        }
+        else if (move.x == 0 && move.y == 0)
+        {
+            footstep.mute = true;
+        }
     }
 }

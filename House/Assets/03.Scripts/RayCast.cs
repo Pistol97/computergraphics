@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class RayCast : MonoBehaviour
 {
+
     private GameObject rayCastedObject;
     [SerializeField] private LightSwitch lightSwitch;
     [SerializeField] private int rayLength = 10;
@@ -19,15 +20,16 @@ public class RayCast : MonoBehaviour
 
         if (Physics.Raycast(transform.position, forward, out hit, rayLength, layerMaskInteract.value))
         {
-            if (hit.collider.CompareTag("Object"))
+            if (hit.collider.CompareTag("Redbook"))
             {
                 CrosshairActive();
                 rayCastedObject = hit.collider.gameObject;
 
                 if (Input.GetKeyDown("e"))
                 {
-                    Debug.Log("물체와 상호작용함");
                     rayCastedObject.SetActive(false);
+                    RedBook.StartHorror = true;
+                    Debug.Log(RedBook.StartHorror.ToString());
                 }
             }
             else if (hit.collider.CompareTag("Switch"))

@@ -5,8 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - Object
   - Switch
+  - Redbook
   layers:
   - Default
   - TransparentFX
