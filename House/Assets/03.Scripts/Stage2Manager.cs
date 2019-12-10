@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Stage2Manager : MonoBehaviour
 {
@@ -18,8 +19,14 @@ public class Stage2Manager : MonoBehaviour
     bool isChanged = false;
     bool isOn = false;
     bool isSwitched = false;
+
+    public AudioClip clip;
+    public Image image;
+    private float alpha = 1.0f;
+
     void Start()
     {
+        StartCoroutine(Fadein());
         bgm.clip = audioClip;
     }
 
@@ -98,5 +105,15 @@ public class Stage2Manager : MonoBehaviour
                     break;
             }
         }
+    }
+    IEnumerator Fadein()
+    {
+        while (alpha > 0.0f)
+        {
+            alpha -= Time.deltaTime;
+            image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);
+            yield return null;
+        }
+        image.enabled = false;
     }
 }

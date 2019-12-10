@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class LightSwitch : MonoBehaviour
@@ -15,7 +16,10 @@ public class LightSwitch : MonoBehaviour
     {
         get { return lightOn; }
     }
-   
+
+    public Image image;
+    private float alpha = 0;
+
     public void turnOn()
     {
         check++;
@@ -39,12 +43,37 @@ public class LightSwitch : MonoBehaviour
     {
         if(check==2 && SceneManager.GetActiveScene().name=="1Stage")
         {
-            SceneManager.LoadScene("2Stage");
-           
+            StartCoroutine(Fadeout());
+            
         }
         if (check == 19 && SceneManager.GetActiveScene().name == "2Stage")
         {
-            SceneManager.LoadScene("Ending");
+            StartCoroutine(Fadeout2());
         }
     }
+
+    IEnumerator Fadeout()
+    {
+        image.enabled = true;
+        while (alpha < 1.0f)
+        {
+            alpha += Time.deltaTime;
+            image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);
+            yield return null;
+        }
+        SceneManager.LoadScene("2Stage");
+    }
+
+    IEnumerator Fadeout2()
+    {
+        image.enabled = true;
+        while (alpha < 1.0f)
+        {
+            alpha += Time.deltaTime;
+            image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);
+            yield return null;
+        }
+        SceneManager.LoadScene("Ending");
+    }
+
 }

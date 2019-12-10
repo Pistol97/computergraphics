@@ -8,22 +8,16 @@ public class SceneChange : MonoBehaviour
 {
     public Image image;
 
-    void fadeIn()
-    {
-        image.CrossFadeAlpha(1, 2, false);
-    }
-
+    private float alpha = 0;
     // Start is called before the first frame update
     public void ChangeGameScene()
     {
-        image.canvasRenderer.SetAlpha(0.0f);
-        fadeIn();
-        SceneManager.LoadScene("1Stage");
-       
+        StartCoroutine(Fadeout());
     }
 
     public void GameMenuScene()
     {
+        StartCoroutine(Fadein());
         SceneManager.LoadScene("Base");
     }
 
@@ -33,5 +27,29 @@ public class SceneChange : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
         Application.Quit();
+    }
+
+    IEnumerator Fadein()
+    {
+        while (alpha > 0.0f)
+        {
+            alpha -= Time.deltaTime;
+            image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);
+            yield return null;
+        }
+        image.enabled = false;
+    }
+
+
+    IEnumerator Fadeout()
+    {
+        image.enabled = true;
+        while(alpha < 1.0f)
+        {
+            alpha += Time.deltaTime;
+            image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);
+            yield return null;
+        }
+        SceneManager.LoadScene("1Stage");
     }
 }
