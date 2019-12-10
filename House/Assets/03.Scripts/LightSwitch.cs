@@ -73,6 +73,8 @@ public class LightSwitch : MonoBehaviour
             image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);
             yield return null;
         }
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("Ending");
     }
 
